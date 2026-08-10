@@ -1,3 +1,6 @@
+mod modules;
+mod platform;
+
 use clap::Parser;
 use owo_colors::OwoColorize;
 use sysinfo::{CpuRefreshKind, MemoryRefreshKind, RefreshKind, System};

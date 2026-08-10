@@ -1,6 +1,10 @@
 pub mod cpu;
+pub mod disk;
+pub mod gpu;
 pub mod host;
 pub mod kernel;
 pub mod memory;
 pub mod os;
+pub mod shell;
+pub mod terminal;
 pub mod uptime;
