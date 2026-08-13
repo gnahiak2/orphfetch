@@ -1,4 +1,3 @@
-// src/modules/gpu.rs
 use std::process::Command;
 
 pub fn get() -> String {
@@ -26,13 +25,20 @@ fn linux() -> String {
     String::from_utf8_lossy(&output.stdout)
         .lines()
         .find(|line| {
-            let line = line.to_lowercase();
-            line.contains("vga compatible controller")
-                || line.contains("3d controller")
-                || line.contains("display controller")
+            let lower = line.to_lowercase();
+            lower.contains("vga compatible controller")
+                || lower.contains("3d controller")
+                || lower.contains("display controller")
         })
-        .and_then(|line| line.split_once(':'))
-        .map(|(_, gpu)| gpu.trim().to_string())
+        .and_then(|line| line.split_once(": "))
+        .map(|(_, gpu)| {
+            gpu.replace("Intel Corporation ", "")
+                .replace("Advanced Micro Devices, Inc. ", "")
+                .replace("AMD/ATI ", "")
+                .replace("NVIDIA Corporation ", "")
+                .trim()
+                .to_string()
+        })
         .unwrap_or_else(|| "Unknown".to_string())
 }
 
