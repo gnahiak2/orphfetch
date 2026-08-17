@@ -34,4 +34,6 @@ fn main() {
     println!("CPU:      {}", modules::cpu::get(&system));
     println!("Memory:   {}", modules::memory::get(&system));
     println!("GPU:      {}", modules::gpu::get());
+    println!("Disk:     {}", modules::disk::get());
+    println!("Shell:    {}", modules::shell::get());
 }

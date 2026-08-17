@@ -8,8 +8,3 @@ pub fn gpu() -> String {
 pub fn gpu() -> String {
     "Unknown".into()
 }
-
-#[cfg(target_os = "windows")]
-pub fn gpu() -> String {
-    "Unknown".into()
-}
