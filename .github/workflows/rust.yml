@@ -1,0 +1,53 @@
+name: Rust
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  linux:
+    name: Linux (${{ matrix.distro }})
+    runs-on: ubuntu-latest
+
+    strategy:
+      fail-fast: false
+      matrix:
+        distro:
+          - ubuntu
+          - debian
+          - fedora
+          - arch
+          - opensuse
+          - alpine
+          - rocky
+
+    container:
+      image: ${{ matrix.distro == 'ubuntu' && 'ubuntu:latest' ||
+                matrix.distro == 'debian' && 'debian:stable' ||
+                matrix.distro == 'fedora' && 'fedora:latest' ||
+                matrix.distro == 'arch' && 'archlinux:latest' ||
+                matrix.distro == 'opensuse' && 'opensuse/tumbleweed' ||
+                matrix.distro == 'alpine' && 'alpine:latest' ||
+                'rockylinux:9' }}
+
+    steps:
+      - name: Install dependencies
+        run: |
+          # distro-specific package installation goes here
+
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Check
+        run: cargo check --all-targets
+
+      - name: Build
+        run: cargo build --release
+
+      - name: Test
+        run: cargo test
