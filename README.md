@@ -1,3 +1,4 @@
+# WORK IN PROGRESS THIS IS A TEMPLATE
 # SUPER AWESOME PROJECT!!!
 hey! this is text explaining what my awesome project is :)
 here's an AWESOME gif of my project!
